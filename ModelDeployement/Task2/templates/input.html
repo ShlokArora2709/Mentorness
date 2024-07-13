@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentorness Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom right, #0a001a, #210019);
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
+        }
+        .form-container, .result-container {
+            background-color: #1e1e1e;
+            padding: 23px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            width: 45%;
+        }
+        .form-container form {
+            display: flex;
+            flex-direction: column;
+        }
+        h1 {
+            margin-bottom: 20px;
+            font-size: 2em;
+            color: #00ffab;
+        }
+        label {
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        input[type="submit"] {
+            background-color: #00ffab;
+            color: #0a001a;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        input[type="submit"]:hover {
+            background-color: #00c37a;
+            color: #ffffff;
+        }
+        .result-container p {
+            margin: 10px 0;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h1>Employee Information Form</h1>
+            <form method="post" action="">
+                {% csrf_token %}
+                <label for="age">Age</label>
+                <input type="number" id="age" name="age" required>
+
+                <label for="joining_date">Joining Date</label>
+                <input type="date" id="joining_date" name="joining_date" required>
+
+                <label for="past_experience">Past Experience (in years)</label>
+                <input type="number" id="past_experience" name="past_experience" required>
+
+                <label for="designation">Designation</label>
+                <select id="designation" name="designation" required>
+                    <option value="Analyst">Analyst</option>
+                    <option value="Senior Analyst">Senior Analyst</option>
+                    <option value="Associate">Associate</option>
+                    <option value="Senior Manager">Senior Manager</option>
+                    <option value="Manager">Manager</option>
+                    <option value="Director">Director</option>
+                </select>
+
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+
+        {% if Salary %}
+        <div class="result-container">
+            <h1>Predicted Salary</h1>
+            <p><strong>Salary:</strong> {{ Salary }}</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
